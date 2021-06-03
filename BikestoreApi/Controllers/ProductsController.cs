@@ -17,12 +17,7 @@ namespace BikestoreApi.Controllers
         public ProductsController(ProductContext context)
         {
             _context = context;
-
-            if (_context.Products.Count() == 0)
-            {
-                _context.Products.Add(new Product { name = "Rower 1" });
-                _context.SaveChanges();
-            }
+            
         }
         [HttpGet]
         public IEnumerable<Product> GetProducts()
@@ -62,6 +57,21 @@ namespace BikestoreApi.Controllers
 
                 _context.Products.Update(product);
                 _context.SaveChanges();
+
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public ActionResult<Product> DeleteProduct(int id)
+        {
+            var Product = _context.Products.Find(id);
+
+            if(Product == null)
+            {
+                return NotFound();
+            }
+
+            _context.Products.Remove(Product);
+            _context.SaveChanges();
 
             return NoContent();
         }

@@ -12,6 +12,6 @@ namespace BikestoreApi.Model
         public string name { get; set; }
         public string manufacturer { get; set; }
         public int price { get; set; }
-        public int availability { get; set; }
+        public bool availability { get; set; }
     }
 }
